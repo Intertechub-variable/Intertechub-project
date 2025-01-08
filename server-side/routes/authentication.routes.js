@@ -1,7 +1,7 @@
 import express from 'express';
-import logout from '../controllers/logout';
-import login from '../controllers/login';
-import signUp from '../controllers/signup';
+import logout from '../controllers/logout.js';
+import login from '../controllers/login.js';
+import signUp from '../controllers/signup.js';
 
 const authRouter = express.Router();
 authRouter.post('/login',login)
