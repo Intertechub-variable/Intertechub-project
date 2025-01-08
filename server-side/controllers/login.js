@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User from '../models/User'; // Adjust the path as necessary
+import User from '../models/user.model.js' // Adjust the path as necessary
 
 const login = async (req, res) => {
   const { email, password } = req.body;
