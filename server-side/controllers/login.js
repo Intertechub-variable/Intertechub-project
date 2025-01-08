@@ -27,4 +27,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = login;
+export default login;
