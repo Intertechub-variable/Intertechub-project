@@ -9,11 +9,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateProject() {
 
-const [project, setProject] = useState("")
-const [title, setTitle] = useState("")
-const [description, setDescription] = useState("")
-const [targetAmount, settargetAmount] = useState("")
-const [ endDate, setEndDate] = useState("")
+const [project, setProject] = useState([])
+const [title, setTitle] = useState([])
+const [description, setDescription] = useState([])
+const [targetAmount, settargetAmount] = useState([])
+const [ endDate, setEndDate] = useState([])
 
   const navigate = useNavigate();
 // const [newProduct, setNewProduct] = useState({
@@ -70,56 +70,58 @@ setProject(findProject)
 
       <form onSubmit={handleSubmit} className="w-full mt-[65px] flex flex-col gap-[30px]">
         <div className="flex flex-wrap gap-[40px]">
-          <FormField 
-            labelName="Project Title *"
-            placeholder="Write a title"
-            inputType="text"
-            id='title'
-			name='title'
-            value={project.title || []}
-            // handleChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
-            handleChange={(e)=>setTitle(e.target.value)}
-          />
+
+       <label className="flex-1 w-full flex flex-col">
+        <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">Project Title *</span>
+         <input 
+          value={title}
+          onChange={(e)=>setTitle(e.target.value)}
+          type='text'
+          step="0.1"
+          placeholder='Write a title'
+          className=' block w-full py-[15px] sm:px-[25px] px-[15px] bg-white border
+			 border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none  sm:text-sm'
+            />
+          </label>
+
         </div>
-
-        <FormField 
-            labelName="Story *"
-            placeholder="Write description"
-            isTextArea
-            value={project.description}
-            // handleChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-            handleChange={(e)=>setDescription(e.target.value)}
-          />
-
+          <label className="flex-1 w-full flex flex-col">
+        <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">Description *</span>
+        <textarea 
+          value={description}
+          onChange={(e)=>setDescription(e.target.value)}
+          rows={10}
+          placeholder='Write description'
+          className='py-[15px] sm:px-[25px] px-[15px] block w-full  bg-white border
+									 border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none  sm:text-sm'
+                                      />
+            </label> 
         <div className="flex flex-wrap gap-[40px]">
-          <FormField 
-            labelName="Goal *"
-            placeholder="$1000"
-            inputType="text"
-            value={project.target_amount}
-            // handleChange={(e) => setNewProduct({ ...newProduct, target_amount: e.target.value })}
-            handleChange={(e)=>settargetAmount(e.target.value)}
-          />
-          <FormField 
-            labelName="End Date *"
-            placeholder="End Date"
-            inputType="date"
-            value={project.end_date}
-            // handleChange={(e) => setNewProduct({ ...newProduct, end_date: e.target.value })}
-            handleChange={(e)=>setEndDate(e.target.value)}
-          />
+        
+         <label className="flex-1 w-full flex flex-col">
+        <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">Goal *</span>
+         <input 
+          value={targetAmount}
+          onChange={(e)=>settargetAmount(e.target.value)}
+          type='text'
+          placeholder='$1000'
+          className=' block w-full py-[15px] sm:px-[25px] px-[15px] bg-white border
+			 border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none  sm:text-sm'
+            />
+          </label>
+
+          <label className="flex-1 w-full flex flex-col">
+        <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">End Date *</span>
+         <input 
+          value={endDate}
+          onChange={(e)=>setEndDate(e.target.value)}
+          type='date'
+          placeholder='End Date'
+          className=' block w-full py-[15px] sm:px-[25px] px-[15px] bg-white border
+			 border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none  sm:text-sm'
+            />
+          </label>
         </div>
-          {/* <div className='mt-1 flex items-center'>
-					<input type='file' id='image' className='sr-only' accept='image/*' onChange={handleImageChange} />
-					<label
-						htmlFor='image'
-						className='cursor-pointer bg-gray-700 py-2 px-3 border border-gray-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500'
-					>
-						<Upload className='h-5 w-5 inline-block mr-2' />
-						Upload Image
-					</label>
-					{newProduct.image && <span className='ml-3 text-sm text-gray-400'>Image uploaded </span>}
-				</div> */}
 
           <div className="flex justify-center items-center mt-[40px]">
             <CustomButton 

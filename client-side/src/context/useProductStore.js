@@ -45,12 +45,7 @@ export const useProductStore = create((set) => ({
 		set({ loading: true });
 		try {
 			const res = await axios.patch(`${BASE_URL}/api/projects/update/${productId}`, updatedData);
-             
-
 			 // console.log(res.data);
-
-
-
 
 			 set((prevState)=>{
 	         
@@ -106,7 +101,7 @@ export const useProductStore = create((set) => ({
 	deleteProduct: async (productId) => {
 		set({ loading: true });
 		try {
-			await axios.delete(`/projects/delete-product/${productId}`);
+			await axios.delete(`${BASE_URL}/api/projects/${productId}`);
 			set((prevProducts) => ({
 				projects: prevProducts.projects.filter((product) => product._id !== productId),
 				loading: false,

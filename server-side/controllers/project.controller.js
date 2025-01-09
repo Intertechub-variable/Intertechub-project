@@ -77,7 +77,7 @@ export const deleteProject = async (req,res)=>{
     if(!project){
         return res.status(404).json({message:'Project not found'})
     }
-    if(product.image){
+    if(project.image){
         try {
              const public_id = Project.image.split('/').pop().split('.')[0];
              await cloudinary.uploader.destroy(`products/${public_id}`);
