@@ -1,21 +1,25 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import axios from "../utils/axios";
+import { BASE_URL } from "../utils";
+
 
 export const useProductStore = create((set) => ({
-	products: [],
+	projects: [],
 	loading: false,
+	current_amount:0,
 
-	setProducts: (products) => set({ products }),
+	setProjects: (projects) => set({ projects }),
     
-	createProduct: async (productData) => {
+	createProject: async (productData) => {
 		set({ loading: true });
 		try {
-			const res = await axios.post("/products/create-product", productData);
+			const res = await axios.post(`${BASE_URL}/api/projects/create`, productData);
 			set((prevState) => ({
-				products: [...prevState.products, res.data],
+				projects: [...prevState.projects, res.data],
 				loading: false,
 			}));
+			toast.success("Product created successfully")
 		} catch (error) {
 			toast.error(error.response.data.error);
 			set({ loading: false });
@@ -24,30 +28,87 @@ export const useProductStore = create((set) => ({
 	fetchAllProducts: async () => {
 		set({ loading: true });
 		try {
-			const response = await axios.get("/products");
-			set({ products: response.data, loading: false });
+			const response = await axios.get(`${BASE_URL}/api/projects`,{headers:{
+					"Content-Type":"application/json",
+			}	
+				});
+			console.log(response.data)
+			set({ projects: response.data, loading: false });
 		} catch (error) {
-			set({ error: "Failed to fetch all products", loading: false });
+			set({ error: "Failed to fetch all projects", loading: false });
 			console.log(error.response)
 			// toast.error(error.response.data.error || "Failed to fetch all products");
 		}
 	},
+    
+	updateProject: async (productId, updatedData)=>{
+		set({ loading: true });
+		try {
+			const res = await axios.patch(`${BASE_URL}/api/projects/update/${productId}`, updatedData);
+             
+
+			 // console.log(res.data);
+
+
+
+
+			 set((prevState)=>{
+	         
+			    const updatedProjects = prevState.projects.map((project)=>{
+					if(project._id === productId){
+						return{
+							...project,
+							...updatedData
+						}
+					}
+					return project;
+				})
+				 return {
+					 projects:updatedProjects,
+					 loading:false,
+
+				 }
+			 })
+            
+			// set((prevState) => ({
+			// 	projects: [...prevState.projects, res.data],
+			// 	loading: false,
+			// }));
+			toast.success("Product updated successfully")
+		} catch (error) {
+			toast.error(error.response.data.error);
+			set({ loading: false });
+		}
+	},
+
 	fetchProductsByCategory: async (category) => {
 		set({ loading: true });
 		try {
 			const response = await axios.get(`/products/category/${category}`);
-			set({ products: response.data, loading: false });
+			set({ projects: response.data, loading: false });
 		} catch (error) {
-			set({ error: "Failed to fetch products by category", loading: false });
+			set({ error: "Failed to fetch projects by category", loading: false });
 			toast.error(error.response.data.error || "Failed to fetch products by category");
 		}
 	},
+	// getProductById: async (productId) => {
+	// 	set({ loading: true });
+	// 	try {
+	// 		const response = await axios.get(`${BASE_URL}/api/projects`,{headers:{
+	// 				"Content-Type":"application/json",
+	// 		}	
+	// 			});
+	// 	} catch (error) {
+	// 		set({ loading: false });
+	// 		toast.error(error.response.data.error || "Failed to delete product");
+	// 	}
+	// },
 	deleteProduct: async (productId) => {
 		set({ loading: true });
 		try {
-			await axios.delete(`/products/delete-product/${productId}`);
+			await axios.delete(`/projects/delete-product/${productId}`);
 			set((prevProducts) => ({
-				products: prevProducts.products.filter((product) => product._id !== productId),
+				projects: prevProducts.projects.filter((product) => product._id !== productId),
 				loading: false,
 			}));
 		} catch (error) {
@@ -77,7 +138,7 @@ export const useProductStore = create((set) => ({
 	fetchFeaturedProducts: async () => {
 		set({ loading: true });
 		try {
-			const response = await axios.get("/products/feature-product");
+			const response = await axios.get("/projects/feature-product");
 			set({ products: response.data, loading: false });
 		} catch (error) {
 			set({ error: "Failed to fetch featured products", loading: false });

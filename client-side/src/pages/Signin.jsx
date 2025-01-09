@@ -6,15 +6,15 @@ import { useUserStore } from '../context/authContext';
 
 export default function Signin() {
   
+
+
  const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+ const [password, setPassword] = useState("");
 
 const {login,loading} = useUserStore()
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// login(email,password)
-    console.log(email,password)
+		login(email,password)
 	};
 
   return (

@@ -4,8 +4,7 @@
 
 .background {
     position: relative;
-    height: 100vh; 
-    width: 100vw; 
+    height: 100vh;  
     background-size: cover;
     background-position: center;
     animation: slide 10s linear infinite; /* Adjust duration as needed */

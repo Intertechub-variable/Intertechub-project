@@ -18,19 +18,18 @@ export const CreatProject = async (req,res)=>{
   const { title,image, description, current_amount,target_amount,end_date  } = req.body;
     try {
         let result = null
-        // if(image){
-        //  result  = await cloudinary.uploader.upload(image,{
-        //         folder:'projects',  
-        //     })
-        // }
+        if(image){
+         result  = await cloudinary.uploader.upload(image,{
+                folder:'projects',  
+            })
+        }
         const product = await Project.create({
             title,
             description,
-            current_amount,
             target_amount,
             end_date,
-            creator:req.user.id
-            // image:result?.secure_url? result?.secure_url:'',
+            creator:req.user.id,
+            image:result?.secure_url? result?.secure_url:'',
          
         })
         res.json(product)
