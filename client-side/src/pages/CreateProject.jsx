@@ -81,7 +81,7 @@ const handleImageChange = (e) => {
         </div>
 
         <FormField 
-            labelName="Story *"
+            labelName="Description *"
             placeholder="Write description"
             isTextArea
             value={newProduct.description}
