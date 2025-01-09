@@ -2,7 +2,7 @@ import  { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {motion} from 'framer-motion'
 import { money } from '../assets';
-import { checkIfImage } from '../utils';
+// import { checkIfImage } from '../utils';
 import Loader from '../components/Loader';
 import CustomButton from '../components/CustomButton';
 import FormField from '../components/FormField';
@@ -13,22 +13,22 @@ const CreateProject = () => {
   const navigate = useNavigate();
   // const [isLoading, setIsLoading] = useState(false);
 const [newProduct, setNewProduct] = useState({
-		name: '',
     title: '',
     description: '',
-    target: '', 
-    deadline: '',
+    target_amount: '', 
+    end_date: '',
     image: ''
 	});
 
-const { createProduct, loading:isLoading } = useProductStore();
+const { createProject, loading:isLoading } = useProductStore();
 
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			// await createProduct(newProduct);
-			setNewProduct({ name: '',title: '',description: '',target: '', deadline: '',image: '' });
+			await createProject(newProduct);
+      navigate('/')
+			// setNewProduct({ title: '',description: '',target_amount: '', end_date: '',image: '' });
 		} catch {
 			console.log("error creating a product");
 		}
@@ -60,7 +60,7 @@ const handleImageChange = (e) => {
 
       <form onSubmit={handleSubmit} className="w-full mt-[65px] flex flex-col gap-[30px]">
         <div className="flex flex-wrap gap-[40px]">
-          <FormField 
+          {/* <FormField 
             labelName="Your Name *"
             placeholder="Amanuel Tamirat"
             inputType="text"
@@ -68,7 +68,7 @@ const handleImageChange = (e) => {
 						name='name'
             value={newProduct.name}
             handleChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-          />
+          /> */}
           <FormField 
             labelName="Project Title *"
             placeholder="Write a title"
@@ -99,14 +99,14 @@ const handleImageChange = (e) => {
             placeholder="$1000"
             inputType="text"
             value={newProduct.target}
-            handleChange={(e) => setNewProduct({ ...newProduct, target: e.target.value })}
+            handleChange={(e) => setNewProduct({ ...newProduct, target_amount: e.target.value })}
           />
           <FormField 
             labelName="End Date *"
             placeholder="End Date"
             inputType="date"
-            value={newProduct.deadline}
-            handleChange={(e) => setNewProduct({ ...newProduct, deadline: e.target.value })}
+            value={newProduct.end_date}
+            handleChange={(e) => setNewProduct({ ...newProduct, end_date: e.target.value })}
           />
         </div>
 
