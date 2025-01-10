@@ -9,6 +9,12 @@ const signUp = async (req, res) => {
   }
 
   try {
+    // Check if there is any user in the database and if none make it an admin 
+    const users = await User.find();
+    if (users.length === 0) {
+      req.body.role = 'admin';
+    };
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });

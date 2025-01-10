@@ -17,7 +17,11 @@ console.log(email)
     }
 
     // Create and sign a token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '10d' });
+    const payload = {
+      id: user._id,
+      role: user.role
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '10d' });
 
     res.cookie('token', token, { httpOnly: true });
     res.json({ user: { id: user._id,name:user.username, email: user.email } });
