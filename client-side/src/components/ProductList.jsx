@@ -1,34 +1,12 @@
-import  { useEffect, useState } from 'react';
-import axios from 'axios';
+import htmlReactParcer from 'html-react-parser'
+import { useProductStore } from '../context/useProductStore';
+import { FaMapMarker } from 'react-icons/fa';
+import { truncate } from '../utils';
+import { Link } from 'react-router-dom';
 import { CampaignProgress } from './CampaignProgress';
 
-const ProductList = () => {
-    const [projects, setProjects] = useState([
-        {
-            id:1,
-            title:'Project-1',
-            description:'Description-1',
-             current_amount:50,
-            target_amount:100,
-            end_date:new Date()
-        },
-         {
-            id:2,
-            title:'Project-2',
-            description:'Description-1',
-           current_amount:100,
-            target_amount:500,
-            end_date: new Date()
-        },
-         {
-            id:4,
-            title:'Project-3',
-            description:'Description-1',
-            current_amount:100,
-            target_amount:100,
-            end_date:new Date()
-        }
-    ]);
+const ProductList = ({search}) => {
+   const {projects} = useProductStore()
 
     // useEffect(() => {
     //     const fetchProjects = async () => {
@@ -39,20 +17,44 @@ const ProductList = () => {
     // }, []);
 
     return (
-        <div className='h-screen'>
-            <div className='mx-20 my-10'>            
-            <h1>Projects</h1>
-            <ul className='grid grid-cols-2 gap-20'>
-                {projects.map((project) => (
-                    <li key={project.id}>
-                        {project.title} - Raised: ${project.current_amount} / Goal: ${project.target_amount}
-                        <CampaignProgress campaign={project}/>
-                    </li>
-                ))}
-            </ul>
+        <div className="mx-20 screen">
+        <h1 className="flex justify-center p-5 text-4xl font-semibold">All Projects</h1>
+        <div className="grid grid-cols-4 gap-5 ">
+         {projects.length ? projects.filter((project)=>{
+              return search.toLowerCase() === '' ? project :  project.title.toLowerCase().includes(search.toLowerCase())
+            }).map((project)=>{
+            return (
+               <>
+               <div key={project._id} className="bg-white group">
+                <Link to={`/products/${project._id}`} className="">
+                <img className="h-40 w-full" src={project.image} alt={project.title} />
+                <div className="p-5">
+                   <p className="font-semibold text-xl">{project.title}</p>
+                   <p className="py-2">{htmlReactParcer(String(truncate(project?.description,80)))}</p>
+                </div>
+                </Link>
+                  <div className="flex justify-between gap-10 p-5">
+                   {/* <p className="flex gap-2 items-center py-5 text-gray-400"><FaMapMarker size={10}/> <span>Ethiopia</span></p> */}
+                    <CampaignProgress campaign={project}/> 
+                {/* <button onClick={()=>{
+                  deleteProduct(project._id)
+                  window.location.reload()
+
+                }} className="hidden group-hover:block bg-red-500 hover:bg-red-700 w-full text-white font-bold py-0.5 px-2 rounded">Delete</button> */}
+                   </div>
             </div>
+            </>
+            )
+            
+            
+         })
+         :<div>No Projects Found </div>
+         }
         </div>
-    );
+        <div className="flex justify-center mt-5">
+    </div>
+    </div>
+    )
 };
 
 export default ProductList;

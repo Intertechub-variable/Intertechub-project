@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
-import {motion} from 'framer-motion'
 import Hero from '../components/Hero'
-import img1 from '../images/random3.jpeg'
-import img2 from '../images/random2.avif'
+import img1 from '../images/random2.jpg'
+import img2 from '../images/random1.jpg'
 import img3 from '../images/random.jpg'
 import FeaturedProducts from '../components/FeaturedProducts'
 import RecentlyFundedProjects from '../components/RecentlyFundedProjects'
-
-
-function HomePage() {
+// C:\Users\windows 10\Intertechub-project\client-side
+function HomePage({funded}) {
      const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const images = [
@@ -40,8 +38,8 @@ function HomePage() {
         <div className='bg-slate-100 py-10'>
           <FeaturedProducts/>
         </div>
-        <div className='bg-slate-100 py-10'>
-            <RecentlyFundedProjects/>
+        <div className='bg-slate-gray-300 py-10'>
+            <RecentlyFundedProjects funded={funded}/>
         </div>
     </div>
   )

@@ -1,8 +1,11 @@
 import React from 'react'
+import FundedProjects from './FundedProjects'
 
-function RecentlyFundedProjects() {
+function RecentlyFundedProjects({funded}) {
   return (
-    <div className='flex justify-center text-4xl'>Recently Funded Projects</div>
+    <div>
+      <FundedProjects funded={funded}/>
+    </div>
   )
 }
 

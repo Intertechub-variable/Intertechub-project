@@ -1,7 +1,8 @@
-import { FaLocationArrow } from "react-icons/fa";
+import htmlReactParcer from 'html-react-parser'
 import { FaMapMarker } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../context/useProductStore";
+import { truncate } from "../utils";
 function FeaturedProducts() {
 
 const { projects ,deleteProduct} = useProductStore()
@@ -19,7 +20,7 @@ const { projects ,deleteProduct} = useProductStore()
                 <img className="h-40 w-full" src={project.image} alt={project.title} />
                 <div className="p-5">
                    <p className="font-semibold text-xl">{project.title}</p>
-                   <p className="py-2">{project.description}</p>
+                   <p className="py-2">{htmlReactParcer(String(truncate(project?.description,80)))}</p>
                 </div>
                 </Link>
                   <div className="flex justify-between gap-10 p-5">

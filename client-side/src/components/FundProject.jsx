@@ -6,19 +6,21 @@ import { useUserStore } from '../context/authContext';
 import { Link } from 'react-router-dom';
 
 const FundProject = ({ projectId,project }) => {
-  const [amount, setAmount] = useState('');
+const [amount, setAmount] = useState('');
 const{user} = useUserStore()
+
   const handleFund = async () => {
     if (amount <= 0) {
-      window.location.reload()
-      // alert('Amount must be greater than zero');
+      alert('Amount must be greater than zero');
       return;
     }
-
+    console.log(typeof amount)
     try {
       await axios.post(`${BASE_URL}/api/projects/fund/${projectId}`, { amount });
       alert('Funding successful!');
+      window.location.reload()
     } catch (error) {
+      console.log(error)
       alert('Error funding project: ' + error.response.data.message);
     }
   };

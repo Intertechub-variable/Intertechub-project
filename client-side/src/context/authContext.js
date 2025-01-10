@@ -8,6 +8,7 @@ export const useUserStore = create((set, get) => ({
 	user:  localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
     : null,
+	// user:null,
 	loading: false,
 	checkingAuth: true,
 

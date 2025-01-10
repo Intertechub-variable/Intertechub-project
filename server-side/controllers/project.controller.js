@@ -177,7 +177,7 @@ export const fundProject = async (req, res) => {
     try {
         const {id} = req.params;
         const amount = +req.body.amount;
-        console.log(id)
+        console.log(typeof amount)
         const project = await Project.findById(id);
         const minAmount = project.target_amount / 100
         if (amount < minAmount){
