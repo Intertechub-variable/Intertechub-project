@@ -8,7 +8,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import CreateProject from './pages/CreateProject'
 import { useProductStore } from './context/useProductStore'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useUserStore } from './context/authContext'
 import { Toaster } from "react-hot-toast";
 import UpdateProject from './components/updateProject'
@@ -17,11 +17,22 @@ import ApproveProjects from './pages/ApproveProjects'
 
 
 function App() {
-
+const [search,setSearch] = useState('')
+const [funded, setFunded] = useState([])
  const {user,login,signup} = useUserStore()
 
- const { fetchAllProducts } = useProductStore();
 
+ const { projects,fetchAllProducts } = useProductStore();
+
+
+useEffect(()=>{
+ const fundedProjects =  projects.filter((project)=>{
+    if(project.current_amount >= project.target_amount){
+        return project
+    }
+})
+setFunded(fundedProjects)
+},[projects])
  useEffect(()=>{
  signup()
  login()
@@ -45,17 +56,17 @@ console.log(user)
     <div>
       <BrowserRouter>
         <div className='bg-black w-full'>
-            <Navbar/>
+            <Navbar onSearch ={setSearch}/>
            </div>
          <Routes>
-            <Route path='/' element={<HomePage/>}/>
+            <Route path='/' element={<HomePage funded={funded}/>}/>
             <Route path='/signup' element={!user? <Signup /> : <Navigate to={'/'}/>} />
             {/* <Route path='/signup' element={<Signup/>}/> */}
             {/* <Route path='/login' element={<Signin/>}/> */}
             <Route path='/login' element={!user ? <Signin />:<Navigate to={'/'}/> } />
              <Route path='/products/:id' element={<ProductDetail/>}/>
               <Route path='/update/:id' element={<UpdateProject/>}/>
-             <Route path='/products' element={<ProductList/>}/>
+             <Route path='/products' element={<ProductList search={search}/>}/>
               <Route path='/create' element={user ? <CreateProject />:<Navigate to={'/login'}/> } />
              {user && <Route path='/approve' element={<ApproveProjects/>}/>}
              {/* user?.user?.role === 'admin' && */}

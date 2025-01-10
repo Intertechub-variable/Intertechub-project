@@ -22,7 +22,7 @@ const login = async (req, res) => {
       userId: user._id,
       role: user.role
     };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "10" });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" });
 
     res.cookie('token', token, { httpOnly: true });
     res.json({ user: { id: user._id,name:user.username,role:user.role, email: user.email } });

@@ -23,3 +23,6 @@ export const checkIfImage = (url, callback) => {
 };
 
 export const BASE_URL = 'http://localhost:3000'
+export const  truncate = (str, n)=> {
+    return str?.length > n ? str.substr(0, n) + '. . .'  : str;
+  }

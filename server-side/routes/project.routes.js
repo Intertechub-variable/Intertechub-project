@@ -12,14 +12,15 @@ projectRouter.get('/approved',getApprovedProjects)
 projectRouter.get('/unapproved',getUnApprovedProjects)
 projectRouter.put('/approve/:id',approveProject);
 projectRouter.post('/create',authMiddleware,createProject);
+
 projectRouter.post('/fund/:id',authMiddleware,fundProject)
+
 projectRouter.put('/update/:id',authMiddleware,updateProject);
 projectRouter.patch('/update/:id',authMiddleware,updateProject);
-//projectRouter.post('/create',authMiddleware, userMiddleware, createProject);
 projectRouter.patch('/update/:id',authMiddleware, userMiddleware, updateProject);
 
 projectRouter.delete('/:id',authMiddleware,deleteProject)
-
+//projectRouter.post('/create',authMiddleware, userMiddleware, createProject);
 // projectRouter.post('/approve/:id', authMiddleware, adminMiddleware, approveProject);
 // projectRouter.get('/unapprovedProjects', authMiddleware, adminMiddleware, getUnApprovedProjects);
 // projectRouter.get('/approvedProjects', authMiddleware, getApprovedProjects);
