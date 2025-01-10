@@ -39,6 +39,29 @@ export const CreatProject = async (req,res)=>{
         res.status(500).json({message:'Internal server error'})
     }
 }
+// export const fundingProject = async (req, res) => {
+//   const { amount } = req.body;
+//   const projectId = req.params.id;
+//   try{
+
+//   if (amount <= 0) {
+//     return res.status(400).json({ message: 'Amount must be greater than zero' });
+//   }
+
+//   const project = await Project.findById(projectId);
+//   if (!project) {
+//     return res.status(404).json({ message: 'Project not found' });
+//   }
+
+//   project.current_amount += amount; // Increase current amount
+//   await project.save();
+
+//   res.json(project);
+//   } catch(error){
+//      console.log(error)
+//     res.status(500).json({message:'Internal server error'})
+//   }
+// }
 
 export const getSingleProject = async (req,res)=>{
     try {

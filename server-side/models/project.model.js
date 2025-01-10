@@ -15,12 +15,12 @@ const projectSchema = new mongoose.Schema({
         required:[true,'Description is required'],
         trim:true,
     },
-    // current_amount:{
-    //     type:Number,
-    //     // required:[true,'Current amount is required'],
-    //     default:0,
-    //     trim:true,
-    // },
+    current_amount:{
+        type:Number,
+        // required:[true,'Current amount is required'],
+        default:0,
+        trim:true,
+    },
      
     target_amount:{
         type:Number,
