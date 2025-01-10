@@ -15,11 +15,12 @@ function Navbar() {
             <input className="block w-[200px] px-3 py-3  bg-gray-100 border border-gray-600 rounded-md shadow-sm
 									 placeholder-gray-400 text-gray-700  focus:outline-none sm:text-sm" type="text" placeholder="Search for products" />
         </div>
-        <div className="flex gap-5">
+        <div className="flex gap-6">
             <Link to={'/login'} className="uppercase">{user ? user?.user?.name ? user?.user?.name :user?.user?.email : "SIGN IN"}</Link>
             <Link to={'/signup'}>{!user && "GET STARTED"}</Link>
             <Link to={'/create'}>CREATE PROJECT</Link>
             <Link onClick={logout} to={'/'}>{user ? "SIGN OUT" : ""}</Link>
+            <Link  to={'/approve'}>ADMIN</Link>
         </div>
     </div>
   )

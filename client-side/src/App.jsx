@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import { useUserStore } from './context/authContext'
 import { Loader } from 'lucide-react'
 import UpdateProject from './components/updateProject'
+import ApproveProjects from './pages/ApproveProjects'
 
 
 
@@ -52,6 +53,7 @@ console.log(user)
               <Route path='/update/:id' element={<UpdateProject/>}/>
              <Route path='/products' element={<ProductList/>}/>
              <Route path='/create' element={<CreateProject/>}/>
+             <Route path='/approve' element={<ApproveProjects/>}/>
          </Routes>
       </BrowserRouter>
          <Footer/>
