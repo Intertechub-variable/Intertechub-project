@@ -1,4 +1,4 @@
-const userMiddleware = async(req, res, next) => {
+export const userMiddleware = async(req, res, next) => {
   const role = req.role;
   if (role != 'user'){
     next();
@@ -7,7 +7,7 @@ const userMiddleware = async(req, res, next) => {
   };
 };
 
-const adminMiddleware = async(req, res, next) => {
+export const adminMiddleware = async(req, res, next) => {
   const role = req.role;
   if (role != 'admin'){
     next();
