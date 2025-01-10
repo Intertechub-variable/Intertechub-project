@@ -25,12 +25,12 @@ export const createProject = async (req, res) => {
             });
         }
 
-        if (pdf) {
-            pdfResult = await cloudinary.uploader.upload(pdf, {
-                folder: 'projects',
-                resource_type: 'raw',
-            });
-        }
+        // if (pdf) {
+        //     pdfResult = await cloudinary.uploader.upload(pdf, {
+        //         folder: 'projects',
+        //         resource_type: 'raw',
+        //     });
+        // }
 
         const project = await Project.create({
             title,
@@ -39,7 +39,7 @@ export const createProject = async (req, res) => {
             end_date,
             creator: req.userId,
             image: imageResult?.secure_url ? imageResult?.secure_url : '',
-            pdf: pdfResult?.secure_url ? pdfResult?.secure_url : '',
+            // pdf: pdfResult?.secure_url ? pdfResult?.secure_url : '',
         });
 
         res.json(project);
@@ -47,7 +47,32 @@ export const createProject = async (req, res) => {
         console.log('error in creating project', error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
-};
+}
+// export const fundingProject = async (req, res) => {
+//   const { amount } = req.body;
+//   const projectId = req.params.id;
+//   try{
+
+//   if (amount <= 0) {
+//     return res.status(400).json({ message: 'Amount must be greater than zero' });
+//   }
+
+//   const project = await Project.findById(projectId);
+//   if (!project) {
+//     return res.status(404).json({ message: 'Project not found' });
+//   }
+
+//   project.current_amount += amount; // Increase current amount
+//   await project.save();
+
+//   res.json(project);
+//   } catch(error){
+//      console.log(error)
+//     res.status(500).json({message:'Internal server error'})
+//   }
+// }
+
+
 
 export const getSingleProject = async (req,res)=>{
     try {
@@ -119,10 +144,9 @@ export const approveProject = async (req, res) => {
         return res.status(500).json({message: 'Internal server error'})
     };
 };
-
 export const getUnApprovedProjects = async (req, res) => {
     try {
-        const projects = await Project.find({where: {isApproved : false}});
+        const projects = await Project.find({isApproved : false});
 
         return res.status(200).send(projects);
     } catch (error) {
@@ -136,7 +160,7 @@ export const getUnApprovedProjects = async (req, res) => {
 
 export const getApprovedProjects = async (req, res) => {
     try {
-        const projects = await Project.find({where: {isApproved : true}});
+        const projects = await Project.find({isApproved : true});
 
         return res.status(200).send(projects);
     } catch (error) {
@@ -152,18 +176,18 @@ export const getApprovedProjects = async (req, res) => {
 export const fundProject = async (req, res) => {
     try {
         const {id} = req.params;
-        const amount = req.body.amount;
-
+        const amount = +req.body.amount;
+        console.log(id)
         const project = await Project.findById(id);
         const minAmount = project.target_amount / 100
         if (amount < minAmount){
             res.status(400).send({message:`The minimum amount to fund is ${minAmount}`})
         }
         project.current_amount += amount
-        project.donors.append({
+        project.donors.push({
             user: req.userId,
             amount,
-            donatedAt: Date.now
+            // donatedAt: Date.now
         });
 
         await project.save()
@@ -171,6 +195,7 @@ export const fundProject = async (req, res) => {
         return res.status(200).send({message: "project funded successfully"})
 
     } catch (error) {
+        console.log(error.message)
         return res.status(500)
         .json({
             error: 'Internal server error', 

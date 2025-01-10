@@ -19,8 +19,8 @@ function Navbar() {
             <Link to={'/login'} className="uppercase">{user ? user?.user?.name ? user?.user?.name :user?.user?.email : "SIGN IN"}</Link>
             <Link to={'/signup'}>{!user && "GET STARTED"}</Link>
             <Link to={'/create'}>CREATE PROJECT</Link>
-            <Link onClick={logout} to={'/'}>{user ? "SIGN OUT" : ""}</Link>
-            <Link  to={'/approve'}>ADMIN</Link>
+            <Link onClick={()=>logout()} to={'/'}>{user ? "SIGN OUT" : ""}</Link>
+            <Link  to={'/approve'}>{user && "ADMIN"}</Link>
         </div>
     </div>
   )
