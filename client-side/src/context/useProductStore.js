@@ -15,10 +15,10 @@ export const useProductStore = create((set) => ({
 		set({ loading: true });
 		try {
 			const res = await axios.post(`${BASE_URL}/api/projects/create`, productData);
-			set((prevState) => ({
-				projects: [...prevState.projects, res.data],
-				loading: false,
-			}));
+			// set((prevState) => ({
+			// 	projects: [...prevState.projects, res.data],
+			// 	loading: false,
+			// }));
 			toast.success("Product created successfully")
 		} catch (error) {
 			toast.error(error.response.data.error);
@@ -28,7 +28,7 @@ export const useProductStore = create((set) => ({
 	fetchAllProducts: async () => {
 		set({ loading: true });
 		try {
-			const response = await axios.get(`${BASE_URL}/api/projects`,{headers:{
+			const response = await axios.get(`${BASE_URL}/api/projects/approved`,{headers:{
 					"Content-Type":"application/json",
 			}	
 				});

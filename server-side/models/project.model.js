@@ -21,7 +21,6 @@ const projectSchema = new mongoose.Schema({
         default:0,
         trim:true,
     },
-     
     target_amount:{
         type:Number,
         required:[true,'Target amount is required'],
@@ -36,7 +35,29 @@ const projectSchema = new mongoose.Schema({
         type:String,
         required:[true,'Project image is required'],
         default:''
-    }
+    },
+    // pdf: {
+    //     type: Buffer,
+    //     required: true
+    // },
+    isApproved: {
+        type: Boolean,
+        default: false
+    },
+    donors: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        amount: {
+            type: Number,
+            required: true
+        },
+        donatedAt: {
+            type: Date,
+            default: Date.now
+        }
+    }]
 },
 {
         timestamps:true

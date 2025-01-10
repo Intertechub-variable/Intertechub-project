@@ -1,4 +1,5 @@
 import { formatDistance } from 'date-fns';
+import moment from "moment";
 // import { Campaign } from '../types';
 
 // interface CampaignProgressProps {
@@ -6,9 +7,13 @@ import { formatDistance } from 'date-fns';
 // }
 
 export function CampaignProgress({ campaign }) {
-  const progress = campaign ? (campaign?.current_amount / campaign?.target_amount) * 100: 50;
-  const timeLeft = formatDistance(new Date(campaign.end_date), new Date(), { addSuffix: true });
+  const progress = campaign ? (+campaign?.current_amount / +campaign?.target_amount) * 100: 50;
 
+
+  const timeLeft = formatDistance(new Date(moment(campaign.end_date).utc().format('YYYY-MM-DD')), new Date(), { addSuffix: true });
+ 
+ 
+ 
   return (
     <div className="bg-white py-2 rounded-lg shadow-sm">
       <div className="space-y-4">

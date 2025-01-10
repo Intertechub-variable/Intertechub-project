@@ -10,7 +10,7 @@ import CreateProject from './pages/CreateProject'
 import { useProductStore } from './context/useProductStore'
 import { useEffect } from 'react'
 import { useUserStore } from './context/authContext'
-import { Loader } from 'lucide-react'
+import { Toaster } from "react-hot-toast";
 import UpdateProject from './components/updateProject'
 import ApproveProjects from './pages/ApproveProjects'
 
@@ -33,6 +33,10 @@ function App() {
 	fetchAllProducts()
 
  },[])
+
+ useEffect(() => {
+    const token = localStorage.getItem('authToken');
+  }, []);
  
 console.log(user)
 
@@ -52,11 +56,13 @@ console.log(user)
              <Route path='/products/:id' element={<ProductDetail/>}/>
               <Route path='/update/:id' element={<UpdateProject/>}/>
              <Route path='/products' element={<ProductList/>}/>
-             <Route path='/create' element={<CreateProject/>}/>
-             <Route path='/approve' element={<ApproveProjects/>}/>
+              <Route path='/create' element={user ? <CreateProject />:<Navigate to={'/login'}/> } />
+             {user && <Route path='/approve' element={<ApproveProjects/>}/>}
+             {/* user?.user?.role === 'admin' && */}
          </Routes>
       </BrowserRouter>
          <Footer/>
+         <Toaster/>
     </div>
   )
 }

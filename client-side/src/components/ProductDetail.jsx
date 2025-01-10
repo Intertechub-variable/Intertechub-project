@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useProductStore } from '../context/useProductStore'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Loader } from 'lucide-react'
-import { formatDistance } from 'date-fns'
+
 import { CampaignProgress } from './CampaignProgress'
+import FundProject from './FundProject'
+
 
 function ProductDetail() {
 
-const [project, setProject] = useState({})
 
+
+const [project, setProject] = useState({})
 const navigate = useNavigate()
 
 const {projects,loading} = useProductStore()
@@ -26,8 +29,8 @@ setProject(findProject)
 const handleUpdate = () =>{
 navigate(`/update/${id}`)
 }
+ const progress = project ? (+project?.current_amount / +project?.target_amount) * 100: 50;
 
-console.log(project)
 
   return (
     <div className=' mb-10'>
@@ -38,13 +41,24 @@ console.log(project)
       <>
       <div className='flex justify-center gap-20 mx-20 '>
         <img className='w-1/2' src={project.image} alt={project.title} />
-        <div> 
-          <h1 className='text-3xl ' >{project.title}</h1>    
+        <div className='flex flex-col gap-10'> 
+          <h1 className='text-3xl ' >{project.title}</h1> 
+          <p>{project.description}</p>
           <CampaignProgress campaign={project}/>  
+          
+          { Math.round(progress) < 100 ? 
+          <>
+           <FundProject project={project} projectId={project._id} />
+          </>:
+          <div>
+            <p className='text-2xl my-4 font-semibold'>Campaign has Ended</p>
+            <h1 className='text-gray-500 italic'>Thankyou for your contribution</h1>
+          </div>
+          }  
+ 
         </div>
       </div>
       <div>
-        <h1>Fund</h1>
       </div>
       </>
       }
