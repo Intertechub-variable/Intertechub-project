@@ -44,8 +44,8 @@ export const useProductStore = create((set) => ({
 	updateProject: async (productId, updatedData)=>{
 		set({ loading: true });
 		try {
-			const res = await axios.patch(`${BASE_URL}/api/projects/update/${productId}`, updatedData);
-			 // console.log(res.data);
+			const res = await axios.put(`${BASE_URL}/api/projects/update/${productId}`, updatedData,{headers:{"Content-Type":"application/json"}, withCredentials:true});
+			 console.log(res.data);
 
 			 set((prevState)=>{
 	         

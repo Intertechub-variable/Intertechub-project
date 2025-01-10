@@ -9,39 +9,40 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateProject() {
 
-const [project, setProject] = useState([])
-const [title, setTitle] = useState([])
-const [description, setDescription] = useState([])
-const [targetAmount, settargetAmount] = useState([])
-const [ endDate, setEndDate] = useState([])
+// const [project, setProject] = useState([])
+// const [title, setTitle] = useState([])
+// const [description, setDescription] = useState([])
+// const [targetAmount, settargetAmount] = useState([])
+// const [ endDate, setEndDate] = useState([])
 
-  const navigate = useNavigate();
-// const [newProduct, setNewProduct] = useState({
-//     title: '',
-//     description: '',
-//     target_amount: '', 
-//     end_date: '',
-// 	});
+const [newProduct, setNewProduct] = useState({
+    title: '',
+    description: '',
+    target_amount: '', 
+    end_date: '',
+	});
 
-const newProduct = {
-    title,
-    description,
-    target_amount:targetAmount,
-    end_date:endDate,
-    image:project.image
-}
+const navigate = useNavigate();
+// const newProduct = {
+//     title,
+//     description,
+//     target_amount:targetAmount,
+//     end_date:endDate,
+//     image:project.image
+// }
 
 const {id} = useParams()
 const { projects,updateProject, loading:isLoading } = useProductStore();
 
 
 
-useEffect(()=>{
-const findProject = projects.find(project => project._id === id)
-if(!findProject) return
+  useEffect(()=>{
+  const findProject = projects.find(project => project._id === id)
+  if(!findProject) return
 
-setProject(findProject)
-},[id,projects])
+  // setProject(findProject)
+  setNewProduct(findProject)
+  },[id,projects])
 
 
 	const handleSubmit = async (e) => {
@@ -55,7 +56,7 @@ setProject(findProject)
         console.log(newProduct)
 	};
 
-    console.log(project)
+    // console.log(newProduct)
 
   return (
      <motion.div className="bg-slate-200 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4"
@@ -74,9 +75,9 @@ setProject(findProject)
        <label className="flex-1 w-full flex flex-col">
         <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">Project Title *</span>
          <input 
-          value={title}
-          onChange={(e)=>setTitle(e.target.value)}
-          type='text'
+          value={newProduct?.title}
+          onChange={(e)=>setNewProduct({...newProduct,title:e.target.value})}
+          type='text' 
           step="0.1"
           placeholder='Write a title'
           className=' block w-full py-[15px] sm:px-[25px] px-[15px] bg-white border
@@ -88,8 +89,9 @@ setProject(findProject)
           <label className="flex-1 w-full flex flex-col">
         <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">Description *</span>
         <textarea 
-          value={description}
-          onChange={(e)=>setDescription(e.target.value)}
+          value={newProduct?.description}
+          // onChange={(e)=>setDescription(e.target.value)}
+          onChange={(e)=>setNewProduct({...newProduct,description:e.target.value})}
           rows={10}
           placeholder='Write description'
           className='py-[15px] sm:px-[25px] px-[15px] block w-full  bg-white border
@@ -101,8 +103,9 @@ setProject(findProject)
          <label className="flex-1 w-full flex flex-col">
         <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">Goal *</span>
          <input 
-          value={targetAmount}
-          onChange={(e)=>settargetAmount(e.target.value)}
+          value={newProduct?.target_amount}
+          onChange={(e)=>setNewProduct({...newProduct,target_mount:e.target.value})}
+          // onChange={(e)=>settargetAmount(e.target.value)}
           type='text'
           placeholder='$1000'
           className=' block w-full py-[15px] sm:px-[25px] px-[15px] bg-white border
@@ -113,8 +116,9 @@ setProject(findProject)
           <label className="flex-1 w-full flex flex-col">
         <span className="font-epilogue font-medium text-[14px] leading-[22px] text-[#808191] mb-[10px]">End Date *</span>
          <input 
-          value={endDate}
-          onChange={(e)=>setEndDate(e.target.value)}
+          value={newProduct?.end_date}
+          onChange={(e)=>setNewProduct({...newProduct,end_date:e.target.value})}
+          // onChange={(e)=>setEndDate(e.target.value)}
           type='date'
           placeholder='End Date'
           className=' block w-full py-[15px] sm:px-[25px] px-[15px] bg-white border
