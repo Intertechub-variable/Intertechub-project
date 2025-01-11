@@ -41,18 +41,18 @@ A crowdfunding platform built using the MERN stack (MongoDB, Express.js, React.j
 # Endpoints
 ## Authentication Endpoints
 ## Method	Endpoint	Description
-  POST	/auth/signup	Register a new user
-  POST	/auth/login	Authenticate a user and get a token 
-  POST /auth/logout Logout a user
+  - POST	/auth/signup	Register a new user
+  - POST	/auth/login	Authenticate a user and get a token 
+  - POST /auth/logout Logout a user
   
 ## Project API Endpoints
-GET /projects/approved Get projects that Approved by admin
-GET /projects/unapproved Geting projects that not Approved yet by admin
-PUT /projects/approve/:id Approve projects by admin
-POST /projects/create Create projects by user
-POST /projects/fund/:id Funding projects by users
-PUT /projects/update/:id Update project by project id
-DELETE /projects/:id Delete project by project id
+- GET /projects/approved Get projects that Approved by admin
+- GET /projects/unapproved Geting projects that not Approved yet by admin
+- PUT /projects/approve/:id Approve projects by admin
+- POST /projects/create Create projects by user
+- POST /projects/fund/:id Funding projects by users
+- PUT /projects/update/:id Update project by project id
+- DELETE /projects/:id Delete project by project id
 
 # Deployment
 The website is live and accessible at: Base URL: https://crowdfunding-app.onrender.com
