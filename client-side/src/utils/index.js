@@ -22,7 +22,7 @@ export const checkIfImage = (url, callback) => {
   img.onerror = () => callback(false);
 };
 
-export const BASE_URL = 'http://localhost:3000'
+export const BASE_URL = 'http://localhost:5000'
 export const  truncate = (str, n)=> {
     return str?.length > n ? str.substr(0, n) + '. . .'  : str;
   }

@@ -26,7 +26,7 @@ export const useUserStore = create((set, get) => ({
 			password
 		}
 		try {
-			const res = await axios.post(`${BASE_URL}/api/auth/signup`, formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
+			const res = await axios.post(`/auth/signup`, formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
 			set({ user: res.data, loading: false });
 			 localStorage.setItem("userInfo", JSON.stringify(res.data));
 		} catch (error) {
@@ -42,7 +42,7 @@ export const useUserStore = create((set, get) => ({
 			password
 		 }
 		try {
-			const res = await axios.post(`${BASE_URL}/api/auth/login`,formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
+			const res = await axios.post(`/auth/login`,formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
 			set({ user: res.data, loading: false });
 			localStorage.setItem("userInfo", JSON.stringify(res.data));
 		} catch (error) {
@@ -54,7 +54,7 @@ export const useUserStore = create((set, get) => ({
 
 	logout: async () => {
 		try {
-			await axios.post(`${BASE_URL}/api/auth/logout`);
+			await axios.post(`/auth/logout`);
 			 localStorage.removeItem("userInfo");
 			 set({ user: null });
 		} catch (error) {

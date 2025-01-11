@@ -14,7 +14,7 @@ export const useProductStore = create((set) => ({
 	createProject: async (productData) => {
 		set({ loading: true });
 		try {
-			const res = await axios.post(`${BASE_URL}/api/projects/create`, productData);
+			const res = await axios.post(`/projects/create`, productData);
 			// set((prevState) => ({
 			// 	projects: [...prevState.projects, res.data],
 			// 	loading: false,
@@ -29,7 +29,7 @@ export const useProductStore = create((set) => ({
 	fetchAllProducts: async () => {
 		set({ loading: true });
 		try {
-			const response = await axios.get(`${BASE_URL}/api/projects/approved`,{headers:{
+			const response = await axios.get(`/projects/approved`,{headers:{
 					"Content-Type":"application/json",
 			}	
 				});
@@ -45,7 +45,7 @@ export const useProductStore = create((set) => ({
 	updateProject: async (productId, updatedData)=>{
 		set({ loading: true });
 		try {
-			const res = await axios.put(`${BASE_URL}/api/projects/update/${productId}`, updatedData,{headers:{"Content-Type":"application/json"}, withCredentials:true});
+			const res = await axios.put(`/projects/update/${productId}`, updatedData,{headers:{"Content-Type":"application/json"}, withCredentials:true});
 			 console.log(res.data);
 
 			 set((prevState)=>{
@@ -79,7 +79,7 @@ export const useProductStore = create((set) => ({
 	deleteProduct: async (productId) => {
 		set({ loading: true });
 		try {
-			await axios.delete(`${BASE_URL}/api/projects/${productId}`);
+			await axios.delete(`/projects/${productId}`);
 			set((prevProducts) => ({
 				projects: prevProducts.projects.filter((product) => product._id !== productId),
 				loading: false,
