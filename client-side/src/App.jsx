@@ -40,10 +40,11 @@ useEffect(()=>{
 },[projects])
 
  useEffect(()=>{
-    signup()
-    login()
+    // signup()
+    // signup
+    // login()
 	
- },[login,signup])
+ },[])
 
   useEffect(()=>{
 
