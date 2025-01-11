@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
-import axios from "../utils/axios";
-import { BASE_URL } from "../utils";
+// import axios from "../utils/axios";
+// import { BASE_URL } from "../utils";
+import axios from "axios"
 
 
 export const useUserStore = create((set, get) => ({
@@ -21,12 +22,12 @@ export const useUserStore = create((set, get) => ({
 			return toast.error("Passwords do not match");
 		}
         const formData = {
-			name,
+			username:name,
 			email,
 			password
 		}
 		try {
-			const res = await axios.post(`/auth/signup`, formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
+			const res = await axios.post(`/api/auth/signup`, formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
 			set({ user: res.data, loading: false });
 			 localStorage.setItem("userInfo", JSON.stringify(res.data));
 		} catch (error) {
@@ -42,7 +43,7 @@ export const useUserStore = create((set, get) => ({
 			password
 		 }
 		try {
-			const res = await axios.post(`/auth/login`,formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
+			const res = await axios.post(`/api/auth/login`,formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
 			set({ user: res.data, loading: false });
 			localStorage.setItem("userInfo", JSON.stringify(res.data));
 		} catch (error) {
@@ -54,7 +55,7 @@ export const useUserStore = create((set, get) => ({
 
 	logout: async () => {
 		try {
-			await axios.post(`/auth/logout`);
+			await axios.post(`/api/auth/logout`);
 			 localStorage.removeItem("userInfo");
 			 set({ user: null });
 		} catch (error) {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import axios from '../utils/axios'
+// import axios from '../utils/axios'
+import axios from "axios"
 import { BASE_URL } from '../utils'
 import { approveProject } from '../admin/Approve'
 import {motion} from 'framer-motion'
@@ -14,7 +15,7 @@ const {deleteProduct} = useProductStore()
 useEffect(()=>{
   const  getUnapprovedProject = async()=>{
     try {
-       const response = await axios.get(`${BASE_URL}/api/projects/unapproved`)
+       const response = await axios.get(`/api/projects/unapproved`)
        setUnapproved(response.data);
     } catch (error) {
       console.log(error)

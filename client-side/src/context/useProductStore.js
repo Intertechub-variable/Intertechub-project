@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
-import axios from "../utils/axios";
-import { BASE_URL } from "../utils";
+// import axios from "../utils/axios";
+// import { BASE_URL } from "../utils";
+import axios from "axios"
 
 
 export const useProductStore = create((set) => ({
@@ -14,7 +15,7 @@ export const useProductStore = create((set) => ({
 	createProject: async (productData) => {
 		set({ loading: true });
 		try {
-			const res = await axios.post(`/projects/create`, productData);
+			const res = await axios.post(`/api/projects/create`, productData);
 			// set((prevState) => ({
 			// 	projects: [...prevState.projects, res.data],
 			// 	loading: false,
@@ -29,7 +30,7 @@ export const useProductStore = create((set) => ({
 	fetchAllProducts: async () => {
 		set({ loading: true });
 		try {
-			const response = await axios.get(`/projects/approved`,{headers:{
+			const response = await axios.get(`/api/projects/approved`, {withCredentials:true},{headers:{
 					"Content-Type":"application/json",
 			}	
 				});
@@ -45,7 +46,7 @@ export const useProductStore = create((set) => ({
 	updateProject: async (productId, updatedData)=>{
 		set({ loading: true });
 		try {
-			const res = await axios.put(`/projects/update/${productId}`, updatedData,{headers:{"Content-Type":"application/json"}, withCredentials:true});
+			const res = await axios.put(`/api/projects/update/${productId}`, updatedData,{headers:{"Content-Type":"application/json"}, withCredentials:true});
 			 console.log(res.data);
 
 			 set((prevState)=>{
@@ -79,7 +80,7 @@ export const useProductStore = create((set) => ({
 	deleteProduct: async (productId) => {
 		set({ loading: true });
 		try {
-			await axios.delete(`/projects/${productId}`);
+			await axios.delete(`/api/projects/${productId}`);
 			set((prevProducts) => ({
 				projects: prevProducts.projects.filter((product) => product._id !== productId),
 				loading: false,

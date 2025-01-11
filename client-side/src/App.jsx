@@ -39,11 +39,6 @@ useEffect(()=>{
     setFunded(fundedProjects)
 },[projects])
 
- // useEffect(()=>{
- //    signup()
- //    login()
-	
- // },[login,signup])
 
   useEffect(()=>{
 
