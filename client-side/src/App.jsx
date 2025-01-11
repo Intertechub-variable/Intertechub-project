@@ -11,8 +11,9 @@ import { useProductStore } from './context/useProductStore'
 import { useEffect, useState } from 'react'
 import { useUserStore } from './context/authContext'
 import { Toaster } from "react-hot-toast";
-import UpdateProject from './components/updateProject'
+// import UpdateProject from './components/updateProject'
 import ApproveProjects from './pages/ApproveProjects'
+import UpdateProject from './components/UpdateProject.jsx'
 
 
 
