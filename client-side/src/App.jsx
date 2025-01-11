@@ -57,11 +57,7 @@ useEffect(()=>{
 console.log(user)
 
 // if(checkingAuth) return <Loader/>
-const image = 'https://res.cloudinary.com/di2gaalbn/image/upload/v1736519341/projects/jglrwwn5boog7ozmt7uq.avif'
-const public_id = image.split('/').pop().split('.')[0];
-//jglrwwn5boog7ozmt7uq
-//jglrwwn5boog7ozmt7uq
-console.log(public_id)
+
   return (
     <div>
       <BrowserRouter>

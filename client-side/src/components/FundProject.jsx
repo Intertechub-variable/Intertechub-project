@@ -17,7 +17,7 @@ const{user} = useUserStore()
     }
     console.log(typeof amount)
     try {
-      await axios.post(`${BASE_URL}/api/projects/fund/${projectId}`, { amount });
+      await axios.post(`/projects/fund/${projectId}`, { amount });
       toast.success('Funding successful!')
       window.location.reload()
     } catch (error) {

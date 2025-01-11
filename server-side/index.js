@@ -8,6 +8,7 @@ import {v2 as cloudinary } from 'cloudinary'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import path from 'path'
 // import User
 // TODO  edit user model and project model
 
@@ -15,7 +16,11 @@ dotenv.config()
 
 const app = express();
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5000
+const __dirname = path.resolve()
+
+
+
 app.use(cookieParser())
 app.use(cors({credentials: true, methods: ['GET','POST','PUT', 'DELETE']}))
 app.use(bodyParser.urlencoded({ extended:true}))
@@ -32,6 +37,15 @@ cloudinary.config({
 app.use('/api/auth',authRouter)
 app.use('/api/projects', projectRouter)
 // app.use('/api/projects', authMiddleware, projectRouter)
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "/client-side/dist")));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client-side", "dist", "index.html"));
+	});
+}
+
 
 app.listen(PORT, ()=>{
     dbFunction()
