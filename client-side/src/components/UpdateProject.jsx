@@ -9,11 +9,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 function UpdateProject() {
 
-// const [project, setProject] = useState([])
-// const [title, setTitle] = useState([])
-// const [description, setDescription] = useState([])
-// const [targetAmount, settargetAmount] = useState([])
-// const [ endDate, setEndDate] = useState([])
 
 const [newProduct, setNewProduct] = useState({
     title: '',
@@ -23,13 +18,6 @@ const [newProduct, setNewProduct] = useState({
 	});
 
 const navigate = useNavigate();
-// const newProduct = {
-//     title,
-//     description,
-//     target_amount:targetAmount,
-//     end_date:endDate,
-//     image:project.image
-// }
 
 const {id} = useParams()
 const { projects,updateProject, loading:isLoading } = useProductStore();
@@ -59,7 +47,7 @@ const { projects,updateProject, loading:isLoading } = useProductStore();
     // console.log(newProduct)
 
   return (
-     <motion.div className="bg-slate-200 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4"
+     <motion.div className="bg-slate-200 flex justify-center items-center flex-col  sm:p-10 p-4"
     		initial={{ opacity: 0, y: 200 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}

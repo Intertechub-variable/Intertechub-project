@@ -5,8 +5,7 @@ import img2 from '../images/random1.jpg'
 import img3 from '../images/random.jpg'
 import FeaturedProducts from '../components/FeaturedProducts'
 import RecentlyFundedProjects from '../components/RecentlyFundedProjects'
-// C:\Users\windows 10\Intertechub-project\client-side
-function HomePage({funded}) {
+function HomePage({funded,isLoading}) {
      const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const images = [
@@ -39,7 +38,7 @@ function HomePage({funded}) {
           <FeaturedProducts/>
         </div>
         <div className='bg-slate-gray-300 py-10'>
-            <RecentlyFundedProjects funded={funded}/>
+            <RecentlyFundedProjects isLoading={isLoading} funded={funded}/>
         </div>
     </div>
   )

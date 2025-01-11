@@ -1,10 +1,10 @@
 import React from 'react'
 import FundedProjects from './FundedProjects'
 
-function RecentlyFundedProjects({funded}) {
+function RecentlyFundedProjects({isLoading, funded}) {
   return (
     <div>
-      <FundedProjects funded={funded}/>
+      <FundedProjects isLoading={isLoading} funded={funded}/>
     </div>
   )
 }

@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, Loader, Lock, Mail, User, UserPlus } from 'lucide-react';
 import { motion } from "framer-motion";
 import { useUserStore } from '../context/authContext';
+import toast from 'react-hot-toast';
 
 function Signup() {
 
@@ -13,11 +14,17 @@ function Signup() {
 		confirmPassword: "",
 	});
 
+    
     const {signup,loading} = useUserStore()
+	// const navigate = useNavigate()
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData)
+		try {
         signup(formData)
+		// navigate('/')
+		} catch (error) {
+			toast.error(error.response.data.message || "An error occurred")
+		}
 	};
 
   return (

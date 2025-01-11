@@ -8,19 +8,12 @@ import { CampaignProgress } from './CampaignProgress';
 const ProductList = ({search}) => {
    const {projects} = useProductStore()
 
-    // useEffect(() => {
-    //     const fetchProjects = async () => {
-    //         const response = await axios.get('/api/projects');
-    //         setProjects(response.data);
-    //     };
-    //     fetchProjects();
-    // }, []);
 
     return (
-        <div className="mx-20 screen">
-        <h1 className="flex justify-center p-5 text-4xl font-semibold">All Projects</h1>
-        <div className="grid grid-cols-4 gap-5 ">
-         {projects.length ? projects.filter((project)=>{
+        <div className="mx-20 screen container">
+        <h1 className="flex justify-center p-5 text-4xl font-semibold">Projects List</h1>
+        <div className="futured grid grid-cols-4 gap-5 ">
+         {projects.length > 0 ? projects.filter((project)=>{
               return search.toLowerCase() === '' ? project :  project.title.toLowerCase().includes(search.toLowerCase())
             }).map((project)=>{
             return (
@@ -34,13 +27,8 @@ const ProductList = ({search}) => {
                 </div>
                 </Link>
                   <div className="flex justify-between gap-10 p-5">
-                   {/* <p className="flex gap-2 items-center py-5 text-gray-400"><FaMapMarker size={10}/> <span>Ethiopia</span></p> */}
                     <CampaignProgress campaign={project}/> 
-                {/* <button onClick={()=>{
-                  deleteProduct(project._id)
-                  window.location.reload()
-
-                }} className="hidden group-hover:block bg-red-500 hover:bg-red-700 w-full text-white font-bold py-0.5 px-2 rounded">Delete</button> */}
+              
                    </div>
             </div>
             </>

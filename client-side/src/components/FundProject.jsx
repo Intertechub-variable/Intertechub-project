@@ -4,6 +4,7 @@ import axios from '../utils/axios';
 import {BASE_URL} from '../utils/index'
 import { useUserStore } from '../context/authContext';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const FundProject = ({ projectId,project }) => {
 const [amount, setAmount] = useState('');
@@ -17,11 +18,11 @@ const{user} = useUserStore()
     console.log(typeof amount)
     try {
       await axios.post(`${BASE_URL}/api/projects/fund/${projectId}`, { amount });
-      alert('Funding successful!');
+      toast.success('Funding successful!')
       window.location.reload()
     } catch (error) {
       console.log(error)
-      alert('Error funding project: ' + error.response.data.message);
+      toast.error('Error funding project: ' + error.response.data.message); 
     }
   };
 

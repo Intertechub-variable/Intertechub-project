@@ -48,7 +48,7 @@ const handleImageChange = (e) => {
 	};
  
   return (
-    <motion.div className="bg-slate-200 flex justify-center items-center flex-col rounded-[10px] sm:p-10 p-4"
+    <motion.div className="bg-slate-200 flex justify-center items-center flex-col  sm:p-10 p-4"
     		initial={{ opacity: 0, y: 200 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.8 }}
@@ -60,15 +60,6 @@ const handleImageChange = (e) => {
 
       <form onSubmit={handleSubmit} className="w-full mt-[65px] flex flex-col gap-[30px]">
         <div className="flex flex-wrap gap-[40px]">
-          {/* <FormField 
-            labelName="Your Name *"
-            placeholder="Amanuel Tamirat"
-            inputType="text"
-            id='name'
-						name='name'
-            value={newProduct.name}
-            handleChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-          /> */}
           <FormField 
             labelName="Project Title *"
             placeholder="Write a title"
@@ -109,14 +100,6 @@ const handleImageChange = (e) => {
             handleChange={(e) => setNewProduct({ ...newProduct, end_date: e.target.value })}
           />
         </div>
-
-        {/* <FormField 
-            labelName="Project image *"
-            placeholder="Place image URL of your project"
-            inputType="url"
-            value={newProduct?.image}
-            handleChange={handleImageChange}
-          /> */}
           <div className='mt-1 flex items-center'>
 					<input type='file' id='image' className='sr-only' accept='image/*' onChange={handleImageChange} />
 					<label

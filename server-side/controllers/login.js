@@ -7,14 +7,13 @@ const login = async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
-    
     if (!user) {
-      return res.status(400).json({ message: 'Invalid credential' });
+      return res.status(404).json({ message: 'Email does not exist, please sign up' });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credential' });
+      return res.status(404).json({ message: 'Password is not correct' });
     }
 
     // Create and sign a token
@@ -31,5 +30,6 @@ const login = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
+   
+ 
 export default login;

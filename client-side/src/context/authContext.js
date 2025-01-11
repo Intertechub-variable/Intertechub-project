@@ -5,12 +5,13 @@ import { BASE_URL } from "../utils";
 
 
 export const useUserStore = create((set, get) => ({
-	user:  localStorage.getItem("userInfo")
+	user:  
+	localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
-    : null,
-	// user:null,
+    : 
+	null,
 	loading: false,
-	checkingAuth: true,
+	// checkingAuth: true,
 
 	signup: async ({ name, email, password, confirmPassword }) => {
 		set({ loading: true });
@@ -20,7 +21,7 @@ export const useUserStore = create((set, get) => ({
 			return toast.error("Passwords do not match");
 		}
         const formData = {
-			username:name,
+			name,
 			email,
 			password
 		}
@@ -31,6 +32,7 @@ export const useUserStore = create((set, get) => ({
 		} catch (error) {
 			set({ loading: false });
 			toast.error(error.response.data.message || "An error occurred");
+			console.log(error)
 		}
 	},
 	login: async (email, password) => {
@@ -41,24 +43,25 @@ export const useUserStore = create((set, get) => ({
 		 }
 		try {
 			const res = await axios.post(`${BASE_URL}/api/auth/login`,formData,{withCredentials:true},{headers:{"Content-Type":"application/json"}});
-			 console.log(res)
 			set({ user: res.data, loading: false });
 			localStorage.setItem("userInfo", JSON.stringify(res.data));
 		} catch (error) {
 			set({ loading: false });
 			toast.error(error.response.data.message || "An error occurred");
+			console.log(error)
 		}
 	},
 
 	logout: async () => {
 		try {
 			await axios.post(`${BASE_URL}/api/auth/logout`);
-			set({ user: null });
 			 localStorage.removeItem("userInfo");
+			 set({ user: null });
 		} catch (error) {
 			toast.error(error.response?.data?.message || "An error occurred during logout");
 		}
 	},
 }));
+
 
 
