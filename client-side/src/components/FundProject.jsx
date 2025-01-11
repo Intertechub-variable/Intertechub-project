@@ -35,6 +35,7 @@ const{user} = useUserStore()
         type="number"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
+        className='border-solid border-2'
         placeholder={`Enter amount (eg. ${project?.target_amount - project?.current_amount})`}
       />
       <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleFund}>Fund Project</button>
