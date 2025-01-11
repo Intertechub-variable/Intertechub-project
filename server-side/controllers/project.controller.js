@@ -72,8 +72,6 @@ export const createProject = async (req, res) => {
 //   }
 // }
 
-
-
 export const getSingleProject = async (req,res)=>{
     try {
         const {id} = req.params;
@@ -113,10 +111,11 @@ export const deleteProject = async (req,res)=>{
         }
         if(project.image){
             try {
-                const public_id = Project.image.split('/').pop().split('.')[0];
+                const public_id = project.image.split('/').pop().split('.')[0];
+
                 await cloudinary.uploader.destroy(`products/${public_id}`);
             } catch (error) {
-                console.log('error deleting product from cloudinary')
+                console.log('error deleting product from cloudinary',error.message)
             }
         }
         await Project.findByIdAndDelete(id);
@@ -161,7 +160,6 @@ export const getUnApprovedProjects = async (req, res) => {
 export const getApprovedProjects = async (req, res) => {
     try {
         const projects = await Project.find({isApproved : true});
-
         return res.status(200).send(projects);
     } catch (error) {
         return res

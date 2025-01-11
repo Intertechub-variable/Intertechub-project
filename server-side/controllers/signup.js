@@ -7,7 +7,7 @@ const signUp = async (req, res) => {
   if (!username || !email || !password) {
     return res.status(400).json({ message: 'All fields are required' });
   }
-
+    
   try {
     // Check if there is any user in the database and if none make it an admin 
     const users = await User.find();

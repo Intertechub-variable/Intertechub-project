@@ -39,7 +39,7 @@ navigate(`/update/${id}`)
       </div>
       {loading ? <Loader/>:
       <>
-      <div className='flex justify-center gap-20 mx-20 '>
+      <div className='detail flex justify-center gap-20 mx-20 container'>
         <img className='w-1/2' src={project.image} alt={project.title} />
         <div className='flex flex-col gap-10'> 
           <h1 className='text-3xl ' >{project.title}</h1> 

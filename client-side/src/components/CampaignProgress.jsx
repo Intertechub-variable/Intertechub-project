@@ -1,10 +1,5 @@
 import { formatDistance } from 'date-fns';
 import moment from "moment";
-// import { Campaign } from '../types';
-
-// interface CampaignProgressProps {
-//   campaign: Campaign;
-// }
 
 export function CampaignProgress({ campaign }) {
   const progress = campaign ? (+campaign?.current_amount / +campaign?.target_amount) * 100: 50;

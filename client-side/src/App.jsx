@@ -19,6 +19,8 @@ import ApproveProjects from './pages/ApproveProjects'
 function App() {
 const [search,setSearch] = useState('')
 const [funded, setFunded] = useState([])
+const [isLoading, setLoading] = useState(false)
+
  const {user,login,signup} = useUserStore()
 
 
@@ -26,16 +28,19 @@ const [funded, setFunded] = useState([])
 
 
 useEffect(()=>{
- const fundedProjects =  projects.filter((project)=>{
-    if(project.current_amount >= project.target_amount){
-        return project
-    }
-})
-setFunded(fundedProjects)
+  setLoading(true)
+    const fundedProjects =  projects.filter((project)=>{
+        if(project.current_amount >= project.target_amount){
+            return project
+        }
+    })
+    setLoading(false)
+    setFunded(fundedProjects)
 },[projects])
+
  useEffect(()=>{
- signup()
- login()
+    signup()
+    login()
 	
  },[login,signup])
 
@@ -52,6 +57,11 @@ setFunded(fundedProjects)
 console.log(user)
 
 // if(checkingAuth) return <Loader/>
+const image = 'https://res.cloudinary.com/di2gaalbn/image/upload/v1736519341/projects/jglrwwn5boog7ozmt7uq.avif'
+const public_id = image.split('/').pop().split('.')[0];
+//jglrwwn5boog7ozmt7uq
+//jglrwwn5boog7ozmt7uq
+console.log(public_id)
   return (
     <div>
       <BrowserRouter>
@@ -59,16 +69,15 @@ console.log(user)
             <Navbar onSearch ={setSearch}/>
            </div>
          <Routes>
-            <Route path='/' element={<HomePage funded={funded}/>}/>
+            <Route path='/' element={<HomePage isLoading={isLoading} funded={funded}/>}/>
             <Route path='/signup' element={!user? <Signup /> : <Navigate to={'/'}/>} />
-            {/* <Route path='/signup' element={<Signup/>}/> */}
-            {/* <Route path='/login' element={<Signin/>}/> */}
             <Route path='/login' element={!user ? <Signin />:<Navigate to={'/'}/> } />
              <Route path='/products/:id' element={<ProductDetail/>}/>
               <Route path='/update/:id' element={<UpdateProject/>}/>
              <Route path='/products' element={<ProductList search={search}/>}/>
               <Route path='/create' element={user ? <CreateProject />:<Navigate to={'/login'}/> } />
-             {user && <Route path='/approve' element={<ApproveProjects/>}/>}
+             <Route path='/approve' element={user? <ApproveProjects /> : <Navigate to={'/login'}/>} />
+             {/* {user && <Route path='/approve' element={<ApproveProjects/>}/>} */}
              {/* user?.user?.role === 'admin' && */}
          </Routes>
       </BrowserRouter>
