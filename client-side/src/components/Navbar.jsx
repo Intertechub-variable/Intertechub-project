@@ -38,7 +38,7 @@ const handleSearch = (e)=>{
             <Link to={'/login'} className="uppercase">{user ? user?.user?.name ? user?.user?.name :user?.user?.email : "SIGN IN"}</Link>
             <Link to={'/signup'}>{!user && "GET STARTED"}</Link>
             <Link to={'/create'}>{user && "CREATE PROJECT"}</Link>
-            <Link  to={'/approve'}>{user && "ADMIN"}</Link>
+            <Link  to={'/admin'}>{user && "ADMIN"}</Link>
             <Link onClick={()=>logout()} to={'/'}>{user ? "SIGN OUT" : ""}</Link>
         </div>
                  <IconContext.Provider value={{ color: '#000000' }} className=''>

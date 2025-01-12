@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
-// import axios from '../utils/axios'
 import axios from "axios"
-import { BASE_URL } from '../utils'
 import { approveProject } from '../admin/Approve'
 import {motion} from 'framer-motion'
 import { useProductStore } from '../context/useProductStore'
-import CustomButton from '../components/CustomButton'
+
+
+
+
+
 function ApproveProjects() {
 const [unapproved, setUnapproved] = useState([])
-  const [showModal, setShowModal] = useState(false)
+const [showModal, setShowModal] = useState(false)
+
 
 const {deleteProduct} = useProductStore()
 
@@ -23,10 +26,6 @@ useEffect(()=>{
   } 
   getUnapprovedProject()
 },[])
-
-console.log(unapproved)
-
-
 
   return (
     <div className='container h-screen m-20 flex flex-col gap-10'>

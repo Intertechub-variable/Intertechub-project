@@ -9,7 +9,7 @@ export const useProductStore = create((set) => ({
 	projects: [],
 	loading: false,
 	current_amount:0,
-
+	allProjects:[],
 	setProjects: (projects) => set({ projects }),
     
 	createProject: async (productData) => {
@@ -90,6 +90,21 @@ export const useProductStore = create((set) => ({
 			toast.error(error.response.data.error || "Failed to delete product");
 		}
 	},
-    
+   getAllProjects:async()=>{
+	  set({ loading: true });
+	  try {
+			const response = await axios.get(`/api/projects`, {withCredentials:true},{headers:{
+					"Content-Type":"application/json",
+			}	
+				});
+		
+			set({allProjects:response.data,loading:false})
+
+		} catch (error) {
+			set({ error: "Failed to fetch all projects", loading: false });
+			console.log(error.response)
+			// toast.error(error.response.data.error || "Failed to fetch all products");
+		}
+   } 
 }
 ));

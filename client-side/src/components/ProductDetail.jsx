@@ -48,7 +48,7 @@ navigate(`/update/${id}`)
           
           { Math.round(progress) < 100 ? 
           <>
-           <h1 className='text-2xl italic'>Please Fist log in to contribute</h1>
+           <h1 className='text-2xl italic'>Please First log in to contribute</h1>
            <FundProject project={project} projectId={project._id} />
           </>:
           <div>
