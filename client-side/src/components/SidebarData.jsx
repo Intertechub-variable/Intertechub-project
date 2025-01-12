@@ -19,7 +19,7 @@ export const SidebarData = [
   },
   {
     title: 'ADMIN',
-    path: '/approve',
+    path: '/admin',
     icon: <FaIcons.FaCartPlus />,
     cName: 'nav-text'
   },

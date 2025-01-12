@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import User from '../models/user.model.js'
+import jwt from 'jsonwebtoken';
 
 const signUp = async (req, res) => {
   const { username, email, password } = req.body;
@@ -28,6 +29,14 @@ const signUp = async (req, res) => {
     });
 
     await newUser.save();
+
+  const payload = {
+      userId: newUser._id,
+      role: newUser.role
+    };
+ const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "7d" });
+
+    res.cookie('token', token, { httpOnly: true });
     res.status(201).json({ message: 'User created successfully',user: { id: newUser._id,name:newUser.username,role:newUser.role, email: newUser.email }  });
   } catch (error) {
     console.log(error.message)

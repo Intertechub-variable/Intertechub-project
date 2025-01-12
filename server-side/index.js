@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import path from 'path'
+import analyticsRoute from './routes/analytics.route.js';
 // import User
 // TODO  edit user model and project model
 
@@ -37,6 +38,7 @@ cloudinary.config({
 app.use('/api/auth',authRouter)
 app.use('/api/projects', projectRouter)
 // app.use('/api/projects', authMiddleware, projectRouter)
+app.use('/api/analytics',analyticsRoute);
 
 if(process.env.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname, "/client-side/dist")));

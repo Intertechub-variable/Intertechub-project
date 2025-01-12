@@ -12,11 +12,11 @@ const { projects , loading} = useProductStore()
 
     <div className="mx-20 container">
         <h1 className="flex justify-center p-5 text-4xl font-semibold">Featured Projects</h1>
-        <div className="futured grid grid-cols-4 gap-5 ">
+        <div className="futured grid grid-cols-3 gap-10">
          { loading ? <div className=' flex justify-center items-center'><LoaderIcon style={{height:'100px', width:'100px'}}/></div> : projects.length ? projects.map((project)=>{
             return (
                <>
-               <div key={project._id} className=" bg-white group">
+               <div key={project._id} className="transition-all duration-200 shadow-sm hover:shadow-lg hover:shadow-red-600 bg-white group">
                 <Link to={`/products/${project._id}`} className="">
                 <img className="h-40 w-full" src={project.image} alt={project.title} />
                 <div className="p-5">

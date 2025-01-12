@@ -11,9 +11,9 @@ import { useProductStore } from './context/useProductStore'
 import { useEffect, useState } from 'react'
 import { useUserStore } from './context/authContext'
 import { Toaster } from "react-hot-toast";
-// import UpdateProject from './components/updateProject'
-import ApproveProjects from './pages/ApproveProjects'
 import UpdateProject from './components/UpdateProject.jsx'
+import AdminPage from './pages/AdminPage.jsx'
+import axios from 'axios'
 
 
 
@@ -22,10 +22,10 @@ const [search,setSearch] = useState('')
 const [funded, setFunded] = useState([])
 const [isLoading, setLoading] = useState(false)
 
- const {user,login,signup} = useUserStore()
+ const {user} = useUserStore()
 
 
- const { projects,fetchAllProducts } = useProductStore();
+ const { projects,allProjects,fetchAllProducts,getAllProjects } = useProductStore();
 
 
 useEffect(()=>{
@@ -49,16 +49,19 @@ useEffect(()=>{
   useEffect(()=>{
 
 	fetchAllProducts()
+  getAllProjects()
 
- },[])
+ },[fetchAllProducts,getAllProjects])
+
+
+// allProjects.map((projects)=>{
+//   console.log(projects.donors)
+// })
 
  useEffect(() => {
     const token = localStorage.getItem('authToken');
+     
   }, []);
- 
-console.log(user)
-
-// if(checkingAuth) return <Loader/>
 
   return (
     <div>
@@ -74,7 +77,7 @@ console.log(user)
               <Route path='/update/:id' element={<UpdateProject/>}/>
              <Route path='/products' element={<ProductList search={search}/>}/>
               <Route path='/create' element={user ? <CreateProject />:<Navigate to={'/login'}/> } />
-             <Route path='/approve' element={user? <ApproveProjects /> : <Navigate to={'/login'}/>} />
+             <Route path='/admin' element={user? <AdminPage /> : <Navigate to={'/login'}/>} />
              {/* {user && <Route path='/approve' element={<ApproveProjects/>}/>} */}
              {/* user?.user?.role === 'admin' && */}
          </Routes>
