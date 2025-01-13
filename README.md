@@ -17,7 +17,7 @@ A crowdfunding platform built using the MERN stack (MongoDB, Express.js, React.j
    - Mobile-friendly interface for an optimal user experience.
 ## Tasks Based on Roles
  ### Admin
--  Update, delete, and view all Projects through andmin dashboard.
+-  Update, delete, and view all Projects and users through admin dashboard.
 - Approve projects or Delete projects.
  ### User
  - Create and update project 
