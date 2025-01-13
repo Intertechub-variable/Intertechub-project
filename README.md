@@ -72,5 +72,17 @@ A crowdfunding platform built using the MERN stack (MongoDB, Express.js, React.j
 # Deployment
 The website is live and accessible at: Base URL: https://crowdfunding-app.onrender.com
 # Screenshots
-- Sign up
+- Sign Up
   ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(31).png?raw=true)
+- Sign In
+    ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(30).png?raw=true)
+- Projects
+    ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(33).png?raw=true))
+- Project Detail
+    ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(35).png?raw=true))
+- Project Creation
+    ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(36).png?raw=true))
+- Admin Project Approval page
+    ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(37).png?raw=true))
+- Admin Page for all projects
+    ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(38).png?raw=true))
