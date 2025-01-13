@@ -71,3 +71,6 @@ A crowdfunding platform built using the MERN stack (MongoDB, Express.js, React.j
 
 # Deployment
 The website is live and accessible at: Base URL: https://crowdfunding-app.onrender.com
+# Screenshots
+- Sign up
+  ![Alt text](https://github.com/Intertechub-variable/Intertechub-project/blob/main/Screenshot%20(31).png?raw=true)
