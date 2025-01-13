@@ -2,11 +2,26 @@
 
 A crowdfunding platform built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to create projects, fund them, and track their progress.
 ## Features
-- **User Authentication**: Secure user login and registration.
-- **Project Creation**: Users can create new crowdfunding projects.
-- **Funding Projects**: Users can fund projects directly from the platform.
-- **Project Management**: View project details, current funding status, and more.
-- **Responsive Design**: Mobile-friendly interface for an optimal user experience.
+- **User Authentication**:
+   - Secure user login and registration.
+- **Role-Based access**
+   - Admin: Have Full control over all projects for approve or reject(delete)
+   - User: View only approved projects, create projects and fund projects. 
+- **Project Creation**:
+   - Only users can create new crowdfunding projects.
+- **Funding Projects**:
+   - Users can fund projects directly from the platform.
+- **Project Management**:
+    - Anyone can view project details, current funding status, and more.
+- **Responsive Design**:
+   - Mobile-friendly interface for an optimal user experience.
+## Tasks Based on Roles
+ ### Admin
+-  Update, delete, and view all Projects through andmin dashboard.
+- Approve projects or Delete projects.
+ ### User
+ - Create and update project 
+ - View approved projects and project detail.
 
 ## Technologies Used
 - **Frontend**: 
